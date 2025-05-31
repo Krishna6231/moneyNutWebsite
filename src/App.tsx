@@ -1,26 +1,56 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Container,
+} from '@mui/material';
+import Lottie from 'lottie-react';
+import animationData from './Assets/forgotPassword.json'; // Make sure this path is correct
 
-function App() {
+const ResetPasswordPage = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <Container maxWidth="xs" sx={{ mt: 6, mb: 4 }}>
+      <Box textAlign="center" mb={4}>
+        <Typography variant="h4" fontWeight="bold" color="#111">
+          MoneyNut
+        </Typography>
+      </Box>
 
-export default App;
+      <Box display="flex" justifyContent="center" mb={4}>
+        <Lottie animationData={animationData} style={{ width: 220, height: 220 }} />
+      </Box>
+
+      <Box component="form" noValidate autoComplete="off">
+        <TextField
+          fullWidth
+          type="password"
+          label="New Password"
+          variant="outlined"
+          margin="normal"
+          InputProps={{ style: { fontSize: 16 } }}
+        />
+
+        <TextField
+          fullWidth
+          type="password"
+          label="Confirm Password"
+          variant="outlined"
+          margin="normal"
+          InputProps={{ style: { fontSize: 16 } }}
+        />
+
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{ mt: 2, py: 1.5, backgroundColor: '#000' }}
+        >
+          Reset Password
+        </Button>
+      </Box>
+    </Container>
+  );
+};
+
+export default ResetPasswordPage;
