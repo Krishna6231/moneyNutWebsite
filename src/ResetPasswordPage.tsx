@@ -24,6 +24,7 @@ const ResetPasswordPage = () => {
   // Extract token from URL
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
+    console.log(searchParams);
     const t = searchParams.get('token');
     if (t) setToken(t);
   }, [location.search]);
