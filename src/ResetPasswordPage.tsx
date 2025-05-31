@@ -41,6 +41,8 @@ const ResetPasswordPage = () => {
         body: JSON.stringify({ token, password }),
       });
 
+      console.log(response);
+
       const result = await response.json();
 
       if (response.ok) {
