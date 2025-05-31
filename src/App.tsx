@@ -11,6 +11,7 @@ import {
 import Lottie from 'lottie-react';
 import { useLocation } from 'react-router-dom';
 import animationData from './Assets/forgotPassword.json';
+import { useNavigate } from 'react-router-dom';
 
 const ResetPasswordPage = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const ResetPasswordPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const navigate = useNavigate();
 
   // Extract token from URL
   useEffect(() => {
@@ -41,7 +43,10 @@ const ResetPasswordPage = () => {
       const result = await response.json();
 
       if (response.ok) {
-        setSnackbar({ open: true, message: 'Password reset successful!', severity: 'success' });
+        setSnackbar({ open: true, message: 'Password reset successful! Redirecting to login...', severity: 'success' });
+        setTimeout(() => {
+          navigate('/login'); 
+        }, 2000);
       } else {
         throw new Error(result.message || 'Reset failed');
       }
