@@ -12,6 +12,7 @@ import Lottie from 'lottie-react';
 import { useLocation } from 'react-router-dom';
 import animationData from './Assets/forgotPassword.json';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ResetPasswordPage = () => {
   const location = useLocation();
@@ -35,23 +36,19 @@ const ResetPasswordPage = () => {
     }
 
     try {
-      const response = await fetch(`https://api.moneynut.co.in/auth/reset-password`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, password }),
-      });
+        const payload = {token: token, newPassword: password}
+      const response = await axios.post(`https://api.moneynut.co.in/auth/reset-password`, {payload});
 
       console.log(response);
 
-      const result = await response.json();
 
-      if (response.ok) {
+      if (response.status === 201) {
         setSnackbar({ open: true, message: 'Password reset successful! Redirecting to login...', severity: 'success' });
         setTimeout(() => {
           navigate('/login'); 
         }, 2000);
       } else {
-        throw new Error(result.message || 'Reset failed');
+        throw new Error('Reset failed');
       }
     } catch (err: any) {
       setSnackbar({ open: true, message: err.message, severity: 'error' });
