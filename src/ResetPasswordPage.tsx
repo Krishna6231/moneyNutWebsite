@@ -65,10 +65,10 @@ const ResetPasswordPage = () => {
       if (response.status === 201 || response.status === 200) {
         setSnackbar({
           open: true,
-          message: "Password reset successful! Redirecting to login...",
+          message: "Password reset successful!",
           severity: "success",
         });
-        setTimeout(() => navigate("/login"), 2000);
+        setTimeout(() => navigate("/successful"), 2000);
       } else {
         throw new Error("Reset failed");
       }
